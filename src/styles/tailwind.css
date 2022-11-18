@@ -1,0 +1,10 @@
+@tailwind base;
+html {
+  scroll-behavior: smooth;
+}
+@tailwind components;
+@tailwind utilities;
+
+#__next {
+  min-height: 100%;
+}
