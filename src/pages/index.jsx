@@ -17,7 +17,7 @@ export default function Home() {
         <title>STMS - Simplifying student management</title>
         <meta
           name="description"
-          content="Most bookkeeping software is accurate, but hard hard to use. We make the opposite trade-off, and hope you don’t get audited."
+          content="STMS is a student management system that helps schools manage their students, and staff."
         />
       </Head>
       <Header />
