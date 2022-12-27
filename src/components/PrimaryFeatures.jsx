@@ -20,13 +20,13 @@ const features = [
     image: dashboard,
   },
   {
-    title: 'Cashboard',
+    title: 'Cashbook',
     description:
       "Keep track of your income and expenses with ease",
     image: cashboard,
   },
   {
-    title: `Children's`,
+    title: `Students`,
     description:
       "Registry of students and their class and test can be monetized here",
     image: children,

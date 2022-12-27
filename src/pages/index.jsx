@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>STMS - Simplifying student management</title>
+        <title>STMS - Simplifying management for small institutions</title>
         <meta
           name="description"
           content="STMS is a student management system that helps schools manage their students, and staff."

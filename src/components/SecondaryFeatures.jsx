@@ -7,16 +7,16 @@ import { Container } from '@/components/Container'
 
 
 import ourstaff from '@/images/screenshots/ourStaff.png'
-// import legalcases from '@/images/screenshots/legalcases.png'
-// import donators from '@/images/screenshots/donators.png'
+import leads from '@/images/screenshots/leads.png'
+import assets from '@/images/screenshots/assets.png'
 
 const features = [
   {
-    name: 'Donators',
-    summary: 'You can increase your fleet size by buying it from anywhere but maintaining it proprerly is a task.',
+    name: 'Assets Management',
+    summary: 'You can increase your assets size by buying it from anywhere but maintaining it proprerly is a task.',
     description:
-      'By fleet management manage your vehicles with proper maintenance records and keep your fleet safe and well.',
-    image: '',
+      'By assets management manage your vehicles with proper maintenance records and keep your assets safe and well.',
+    image: assets,
     icon: function ReportingIcon() {
       let id = useId()
       return (
@@ -74,12 +74,12 @@ const features = [
     },
   },
   {
-    name: 'Legal Cases',
+    name: 'Leads',
     summary:
-      'Busy roads A to Z trainings high chance for cases.',
+      'Busy roads A to Z trainings high chance for leads.',
     description:
-      'Manage your legal cases related to firm and fleets within the software itself.',
-    image: '',
+      'Manage your leads related to firm and assetss within the software itself.',
+    image: leads,
     icon: function ContactsIcon() {
       return (
         <>
