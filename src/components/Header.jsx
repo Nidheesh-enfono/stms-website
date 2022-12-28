@@ -108,7 +108,7 @@ export function Header() {
             <div className="hidden md:block">
               <NavLink
                 target="_blank"
-                href="https://demo.stms.one/auth/sign-in"
+                href="https://app.stms.one/auth/sign-in"
               >
                 Sign in
               </NavLink>
