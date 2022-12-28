@@ -196,7 +196,7 @@ export default function Register() {
 
     axios
       .post(
-        'https://dev.enfono.com/api_stms_saas/api/v1/utilities/onboarding_academy/',
+        'https://app.stms.one/api_stms_saas/api/v1/utilities/onboarding_academy/',
         {
           user: {
             username,

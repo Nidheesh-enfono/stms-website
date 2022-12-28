@@ -171,7 +171,7 @@ export function Pricing() {
         <div className="-mx-4 mt-16 grid max-w-2xl grid-cols-1 gap-y-10 sm:mx-auto lg:-mx-8 lg:max-w-none lg:grid-cols-3 xl:mx-0 xl:gap-x-8">
           <Plan
             name="Basic"
-            price={selected === 'monthly' ? '₹350' : '₹250'}
+            price={selected === 'monthly' ? '₹1499' : '₹--'}
             description="Good for anyone who is self-employed and just getting started."
             href="/register"
             features={[
@@ -181,13 +181,12 @@ export function Pricing() {
               'Support multiple branches',
               'Support response 3 hours',
               'Finance reports only',
-              'Student mobile app',
             ]}
           />
           <Plan
             featured
             name="Small business"
-            price={selected === 'monthly' ? '₹600' : '₹500'}
+            price={selected === 'monthly' ? '₹--' : '₹--'}
             description="Perfect for small / medium sized businesses."
             href="/register"
             features={[
@@ -199,7 +198,6 @@ export function Pricing() {
               'Priority support',
               'Export reports',
               'Finance & attendance reports',
-              'Student mobile app',
             ]}
           />
           <Plan
