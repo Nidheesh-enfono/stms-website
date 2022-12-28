@@ -185,9 +185,9 @@ export function Pricing() {
           />
           <Plan
             featured
-            name="Small business"
+            name="Premium"
             price={selected === 'monthly' ? '₹ 3000' : '₹ 30000'}
-            description="Perfect for small / medium sized businesses."
+            description="Perfect for small / medium sized organizations."
             href="/register"
             features={[
               'Staff attendance tracking',
@@ -204,8 +204,8 @@ export function Pricing() {
           <Plan
             name="Custom"
             price={selected === 'monthly' ? '...' : '...'}
-            description="For even the biggest enterprise companies."
-            href="/register"
+            description="For even bigger organizations."
+            href="#"
             features={[
               'On-premise hosting',
               'Unlimited users',
