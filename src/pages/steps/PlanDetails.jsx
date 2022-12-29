@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button } from '@/components/Button'
 import { SelectField, TextField } from '@/components/Fields'
-import CreatableSelect from 'react-select/creatable';
+import CreatableSelect from 'react-select/creatable'
 
 const PlanDetails = ({
   school_name,
@@ -18,86 +18,39 @@ const PlanDetails = ({
   setCountry,
   loading,
 }) => {
+  //Get timezone list from open api
+  const [timezones, setTimezones] = useState([])
+  const [countries, setCountries] = useState([])
+  const [lastActivityDate, setLastActivityDate] = useState('')
+  const [lastActivityDateError, setLastActivityDateError] = useState(false)
 
-  //county list
-  const countryList = [
-    { value: 1, label: 'India' },
-    { value: 2, label: 'USA' },
-    { value: 3, label: 'UK' },
-    { value: 4, label: 'Canada' },
-    { value: 5, label: 'Australia' },
-    { value: 6, label: 'New Zealand' },
-    { value: 7, label: 'Singapore' },
-    { value: 8, label: 'Malaysia' },
-    { value: 9, label: 'Sri Lanka' },
-    { value: 10, label: 'Bangladesh' },
-    { value: 11, label: 'Nepal' },
-    { value: 12, label: 'Pakistan' },
-    { value: 13, label: 'Bhutan' },
-    { value: 14, label: 'Afghanistan' },
-    { value: 15, label: 'Austria' },
-    { value: 16, label: 'Belgium' },
-    { value: 17, label: 'Bulgaria' },
-    { value: 18, label: 'Cyprus' },
-    { value: 19, label: 'Czech Republic' },
-    { value: 20, label: 'Denmark' },
-    { value: 21, label: 'Estonia' },
-    { value: 22, label: 'Finland' },
-    { value: 23, label: 'France' },
-    { value: 24, label: 'Germany' },
-    { value: 25, label: 'Greece' },
-    { value: 26, label: 'Hungary' },
-    { value: 27, label: 'Ireland' },
-    { value: 28, label: 'Italy' },
-    { value: 29, label: 'Latvia' },
-    { value: 30, label: 'Lithuania' },
+  useEffect(() => {
+    fetch('https://restcountries.eu/rest/v2/all')
+      .then((res) => res.json())
+      .then((data) => {
+        const countries = data.map((country) => {
+          return {
+            value: country.name,
+            label: country.name,
+          }
+        })
+        setCountries(countries)
+      })
+  }, [])
 
-  ]
-
-  //time zone list
-  const timeZoneList = [
-    { value: 'UTC', label: 'UTC' },
-    { value: 'IST', label: 'IST' },
-    { value: 'EST', label: 'EST' },
-    { value: 'CST', label: 'CST' },
-    { value: 'MST', label: 'MST' },
-    { value: 'PST', label: 'PST' },
-    { value: 'AST', label: 'AST' },
-    { value: 'GMT', label: 'GMT' },
-    { value: 'BST', label: 'BST' },
-    { value: 'CET', label: 'CET' },
-    { value: 'EET', label: 'EET' },
-    { value: 'MSK', label: 'MSK' },
-    { value: 'WAT', label: 'WAT' },
-    { value: 'CAT', label: 'CAT' },
-    { value: 'EAT', label: 'EAT' },
-    { value: 'NET', label: 'NET' },
-    { value: 'PLT', label: 'PLT' },
-    { value: 'IST', label: 'IST' },
-    { value: 'VST', label: 'VST' },
-    { value: 'CTT', label: 'CTT' },
-    { value: 'JST', label: 'JST' },
-    { value: 'ACT', label: 'ACT' },
-    { value: 'AET', label: 'AET' },
-    { value: 'SST', label: 'SST' },
-    { value: 'NST', label: 'NST' },
-    { value: 'MIT', label: 'MIT' },
-    { value: 'HST', label: 'HST' },
-    { value: 'AST', label: 'AST' },
-    { value: 'PNT', label: 'PNT' },
-    { value: 'MST', label: 'MST' },
-    { value: 'PRT', label: 'PRT' },
-    { value: 'CNT', label: 'CNT' },
-    { value: 'AGT', label: 'AGT' },
-    { value: 'BET', label: 'BET' },
-    { value: 'ART', label: 'ART' },
-    { value: 'CLT', label: 'CLT' },
-    { value: 'ECT', label: 'ECT' },
-    { value: 'IET', label: 'IET' },
-    { value: 'PST', label: 'PST' },
-    { value: 'PNT', label: 'PNT' },
-    { value: 'AGT', label: 'AGT' },
-  ]
+  useEffect(() => {
+    fetch('https://worldtimeapi.org/api/timezone')
+      .then((res) => res.json())
+      .then((data) => {
+        const timezones = data.map((timezone) => {
+          return {
+            value: timezone,
+            label: timezone,
+          }
+        })
+        setTimezones(timezones)
+      })
+  }, [])
 
   return (
     <>
@@ -132,6 +85,14 @@ const PlanDetails = ({
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
         autoComplete="phone"
+        onKeyPress={(e) => {
+          if (e.target.value.length > 12) {
+            e.preventDefault()
+          } else if (/[a-zA-Z]/.test(e.key)) {
+            e.preventDefault()
+          }
+        }}
+        inputProps={{ maxLength: 12 }}
         style={{ marginBottom: '.6rem' }}
         required
       />
@@ -144,12 +105,13 @@ const PlanDetails = ({
         style={{ marginBottom: '.6rem' }}
         onChange={(e) => setTimeZone(e.target.value)}
       >
-        <option value="">Choose</option>
-        {timeZoneList.map((item) => (
+        <option value="UTC">UTC</option>
+
+        {/* {timeZoneList.map((item) => (
           <option key={item.value} value={item.value}>
             {item.label}
           </option>
-        ))}
+        ))} */}
       </SelectField>
 
       <div className="col-span-full mt-10">
