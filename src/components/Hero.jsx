@@ -31,8 +31,8 @@ export function Hero() {
         for small institutions
       </h1>
       <p className="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-slate-700">
-        We have developed accurate and simple management system for driving
-        schools
+        We have developed accurate and simple management system for small
+        institutions
       </p>
       <div className="mt-10 flex justify-center gap-x-6">
         <Button href="/register">Get 3 months free</Button>

@@ -215,7 +215,7 @@ export default function Register() {
       .then(() => {
         setLoading(false)
         toast.success('Registration Successful')
-        Router.push('/')
+        window.location='https://app.stms.one/auth/sign-in'
       })
       .catch((e) => {
         setLoading(false)
@@ -238,7 +238,7 @@ export default function Register() {
             <Logo className="h-10 w-auto" />
           </Link>
 
-          <div className="mt-16">
+          <div className="mt-8">
             <UseContextProvider>{displayStep(currentStep)}</UseContextProvider>
           </div>
 
