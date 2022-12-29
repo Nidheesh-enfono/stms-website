@@ -47,6 +47,16 @@ const UserDetails = ({
         onChange={(e) => setMobile(e.target.value)}
         type="number"
         autoComplete="mobile"
+
+        //validate mobile
+        onKeyPress={(e) => {
+          if (e.target.value.length > 12) {
+            e.preventDefault()
+          } else if(/[a-zA-Z]/.test(e.key)){
+            e.preventDefault()
+          }          
+        }}
+        inputProps={{ maxLength: 12 }}
         style={{ marginBottom: '1rem' }}
         required
       />
