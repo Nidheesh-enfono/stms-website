@@ -1,10 +1,10 @@
 const navigation = {
-  support: [
+  company: [
     { name: 'Features', href: '/#features' },
     { name: 'Testimonials', href: '/#testimonials' },
     { name: 'Pricing', href: '/#pricing' },
   ],
-  company: [
+  support: [
     { name: 'About Us', href: '/about-us' },
     { name: 'Contact Us', href: '/contact-us' },
   ],
