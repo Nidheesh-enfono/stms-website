@@ -37,7 +37,7 @@ export default function Register() {
   const [school_name, setSchoolName] = useState('')
   const [address, setAddress] = useState('')
   const [phone, setPhone] = useState('')
-  const [time_zone, setTimezone] = useState('')
+  const [timeZone, setTimezoneValue] = useState('')
   const [last_activity_date, setLastActivityDate] = useState('')
   const [country, setCountry] = useState('')
 
@@ -64,13 +64,13 @@ export default function Register() {
             school_name={school_name}
             address={address}
             phone={phone}
-            time_zone={time_zone}
+            time_zone={timeZone}
             last_activity_date={last_activity_date}
             country={country}
             setSchoolName={setSchoolName}
             setAddress={setAddress}
             setPhone={setPhone}
-            setTimezone={setTimezone}
+            setTimezoneValue={setTimezoneValue}
             setLastActivityDate={setLastActivityDate}
             setCountry={setCountry}
             handleSubmit={handleSubmit}
@@ -143,8 +143,8 @@ export default function Register() {
       name: school_name,
       address,
       phone,
-      time_zone,
-      country: 1,
+      time_zone:timeZone,
+      country,
     }
 
     let error = undefined
@@ -208,8 +208,8 @@ export default function Register() {
           name: school_name,
           address,
           phone,
-          time_zone: 'UTC',
-          country: 1,
+          time_zone: timeZone,
+          country
         }
       )
       .then(() => {

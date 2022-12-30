@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Button } from '@/components/Button'
 import { SelectField, TextField } from '@/components/Fields'
-import CreatableSelect from 'react-select/creatable'
+import Select from 'react-select'
 
 const PlanDetails = ({
   school_name,
@@ -12,7 +12,7 @@ const PlanDetails = ({
   setSchoolName,
   setAddress,
   setPhone,
-  setTimeZone,
+  setTimezoneValue,
   handleSubmit,
   setCurrentStep,
   setCountry,
@@ -21,16 +21,16 @@ const PlanDetails = ({
   //Get timezone list from open api
   const [timezones, setTimezones] = useState([])
   const [countries, setCountries] = useState([])
-  const [lastActivityDate, setLastActivityDate] = useState('')
-  const [lastActivityDateError, setLastActivityDateError] = useState(false)
 
   useEffect(() => {
-    fetch('https://restcountries.eu/rest/v2/all')
+    fetch(
+      'https://app.stms.one/api_stms_saas/api/v1/admin_panel/countries/?limit=300'
+    )
       .then((res) => res.json())
       .then((data) => {
-        const countries = data.map((country) => {
+        const countries = data?.data.results?.map((country) => {
           return {
-            value: country.name,
+            value: country.id,
             label: country.name,
           }
         })
@@ -39,10 +39,13 @@ const PlanDetails = ({
   }, [])
 
   useEffect(() => {
-    fetch('https://worldtimeapi.org/api/timezone')
+    if (!country) return
+    fetch(
+      `https://app.stms.one/api_stms_saas/api/v1/admin_panel/country/${country}/timezones/?limit=300`
+    )
       .then((res) => res.json())
       .then((data) => {
-        const timezones = data.map((timezone) => {
+        const timezones = data?.result?.map((timezone) => {
           return {
             value: timezone,
             label: timezone,
@@ -50,7 +53,8 @@ const PlanDetails = ({
         })
         setTimezones(timezones)
       })
-  }, [])
+  }, [country])
+
 
   return (
     <>
@@ -96,24 +100,42 @@ const PlanDetails = ({
         style={{ marginBottom: '.6rem' }}
         required
       />
-      <SelectField
-        className="col-span-full"
-        label="Time Zone"
-        id="time_zone"
-        name="time_zone"
-        value={time_zone}
-        style={{ marginBottom: '.6rem' }}
-        onChange={(e) => setTimeZone(e.target.value)}
-      >
-        <option value="UTC">UTC</option>
-
-        {/* {timeZoneList.map((item) => (
-          <option key={item.value} value={item.value}>
-            {item.label}
-          </option>
-        ))} */}
-      </SelectField>
-
+      <div style={{ marginBottom: '.6rem' }}>
+        <label
+          htmlFor="country"
+          className="mb-2 block text-sm font-medium text-gray-700"
+        >
+          Country
+        </label>
+        <Select
+          className="col-span-full"
+          label="Country"
+          id="country"
+          name="country"
+          defaultValue={country}
+          isSearchable
+          options={countries}
+          onChange={(value) => setCountry(value.value)}
+        />
+      </div>
+      <div style={{ marginBottom: '.6rem' }}>
+        <label
+          htmlFor="time_zone"
+          className="mb-2 block text-sm font-medium text-gray-700"
+        >
+          Time Zone
+        </label>
+        <Select
+          className="col-span-full"
+          label="Time Zone"
+          id="time_zone"
+          name="time_zone"
+          defaultValue={time_zone}
+          isSearchable
+          options={timezones}
+          onChange={(value) => setTimezoneValue(value.value)}
+        />
+      </div>
       <div className="col-span-full mt-10">
         <Button
           onClick={(e) => setCurrentStep(1)}
